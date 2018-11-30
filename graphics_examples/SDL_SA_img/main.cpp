@@ -15,7 +15,15 @@ using namespace std;
 
 struct Pixel
 {
-	unsigned char r, g, b;
+	unsigned char r, g, b, a;
+};
+
+struct Square
+{
+	float x, y, w, h;
+
+	Pixel color;
+
 };
 
 namespace Game
@@ -29,12 +37,15 @@ namespace Game
 	SDL_Window *window = NULL;
 
 	SDL_Surface *scratch;
+	SDL_Surface *tmp;
 	SDL_Surface *screen;
 
 	int *grid = NULL;
 	int *px, *py;
 	Pixel *color;
 	int n_walkers = 100;
+	Square * squares;
+	int n_boxes = 200;
 
 	void init()
 	{
@@ -62,6 +73,7 @@ namespace Game
 		px = (int*)malloc(n_walkers * sizeof(int));
 		py = (int*)malloc(n_walkers * sizeof(int));
 		color = (Pixel*)malloc(n_walkers * sizeof(Pixel));
+		squares = (Square*)malloc(n_walkers * sizeof(Square));
 
 		for (int i = 0; i < n_walkers; i++)
 		{
@@ -70,6 +82,18 @@ namespace Game
 			color[i].r = rand() % 256;
 			color[i].g = rand() % 256;
 			color[i].b = rand() % 256;
+		}
+
+		for (int i = 0; i < n_boxes; i++)
+		{
+			squares[i].w = rand() % 100;
+			squares[i].h = rand() % 80;
+			squares[i].x = rand() % (screen_width-100);
+			squares[i].y = rand() % (screen_height-80);
+			squares[i].color.r = rand() % 256;
+			squares[i].color.g = rand() % 256;
+			squares[i].color.b = rand() % 256;
+			squares[i].color.a = rand() % 256;
 		}
 		color[0].r = 0;
 		color[0].g = 0;
@@ -139,6 +163,20 @@ namespace Game
 
 		SDL_UpdateWindowSurface(window);
 
+	}
+
+	double difference(SDL_Surface * a, SDL_Surface * b)
+	{
+		a->pixels;
+	}
+
+	void blend(SDL_Surface * a, Square  d)
+	{
+		Pixel * p = (Pixel *)a->pixels;
+		for (int i = 0; i < d.w; i++)
+		{
+			squares[i].x
+		}
 	}
 
 }

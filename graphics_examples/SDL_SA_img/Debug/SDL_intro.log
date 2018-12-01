@@ -1,0 +1,10 @@
+﻿  main.cpp
+c:\users\judgementine\documents\github\image-simulated-annealing\graphics_examples\sdl_sa_img\main.cpp(55): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\judgementine\documents\github\image-simulated-annealing\graphics_examples\sdl_sa_img\main.cpp(67): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\judgementine\documents\github\image-simulated-annealing\graphics_examples\sdl_sa_img\main.cpp(68): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\judgementine\documents\github\image-simulated-annealing\graphics_examples\sdl_sa_img\main.cpp(70): warning C4244: '+=': conversion from 'float' to 'int', possible loss of data
+c:\users\judgementine\documents\github\image-simulated-annealing\graphics_examples\sdl_sa_img\main.cpp(71): warning C4244: '+=': conversion from 'float' to 'int', possible loss of data
+c:\users\judgementine\documents\github\image-simulated-annealing\graphics_examples\sdl_sa_img\main.cpp(217): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\judgementine\documents\github\image-simulated-annealing\graphics_examples\sdl_sa_img\main.cpp(218): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\judgementine\documents\github\image-simulated-annealing\graphics_examples\sdl_sa_img\main.cpp(302): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  SDL_intro.vcxproj -> C:\Users\judgementine\Documents\GitHub\Image-Simulated-annealing\graphics_examples\SDL_SA_img\Debug\SDL_intro.exe

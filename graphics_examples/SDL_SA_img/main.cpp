@@ -176,6 +176,14 @@ namespace Game
 		SDL_BlitSurface(original, NULL, image, NULL);
 
 		current_solution_surface = SDL_CreateRGBSurfaceWithFormat(0, screen_width, screen_width, 24, SDL_PIXELFORMAT_RGB24);
+		SDL_BlitSurface(image, NULL, current_solution_surface, NULL);
+		Pixel * p = (Pixel *)current_solution_surface->pixels;
+		for (int i = 0; i < current_solution_surface->w * current_solution_surface->h; i++)
+		{
+			p[i].r = 0;
+			p[i].b = 0;
+			p[i].g = 0;
+		}
 
 		permuted_solution_surface = SDL_CreateRGBSurfaceWithFormat(0, screen_width, screen_width, 24, SDL_PIXELFORMAT_RGB24);
 

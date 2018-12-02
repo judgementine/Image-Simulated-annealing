@@ -19,10 +19,15 @@ c:\users\judgementine\documents\github\image-simulated-annealing\graphics_exampl
 c:\users\judgementine\documents\github\image-simulated-annealing\graphics_examples\sdl_sa_img\main.cpp(107): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
 c:\users\judgementine\documents\github\image-simulated-annealing\graphics_examples\sdl_sa_img\main.cpp(109): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
 c:\users\judgementine\documents\github\image-simulated-annealing\graphics_examples\sdl_sa_img\main.cpp(110): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-c:\users\judgementine\documents\github\image-simulated-annealing\graphics_examples\sdl_sa_img\main.cpp(143): warning C4244: '=': conversion from 'double' to 'unsigned char', possible loss of data
 c:\users\judgementine\documents\github\image-simulated-annealing\graphics_examples\sdl_sa_img\main.cpp(144): warning C4244: '=': conversion from 'double' to 'unsigned char', possible loss of data
-c:\users\judgementine\documents\github\image-simulated-annealing\graphics_examples\sdl_sa_img\main.cpp(145): error C2039: 'b3': is not a member of 'Pixel'
-  c:\users\judgementine\documents\github\image-simulated-annealing\graphics_examples\sdl_sa_img\main.cpp(17): note: see declaration of 'Pixel'
-c:\users\judgementine\documents\github\image-simulated-annealing\graphics_examples\sdl_sa_img\main.cpp(261): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-c:\users\judgementine\documents\github\image-simulated-annealing\graphics_examples\sdl_sa_img\main.cpp(262): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-c:\users\judgementine\documents\github\image-simulated-annealing\graphics_examples\sdl_sa_img\main.cpp(300): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+c:\users\judgementine\documents\github\image-simulated-annealing\graphics_examples\sdl_sa_img\main.cpp(145): warning C4244: '=': conversion from 'double' to 'unsigned char', possible loss of data
+c:\users\judgementine\documents\github\image-simulated-annealing\graphics_examples\sdl_sa_img\main.cpp(146): warning C4244: '=': conversion from 'double' to 'unsigned char', possible loss of data
+c:\users\judgementine\documents\github\image-simulated-annealing\graphics_examples\sdl_sa_img\main.cpp(258): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\judgementine\documents\github\image-simulated-annealing\graphics_examples\sdl_sa_img\main.cpp(259): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\judgementine\documents\github\image-simulated-annealing\graphics_examples\sdl_sa_img\main.cpp(297): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  Generating code
+  1 of 12 functions ( 8.3%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    1 functions had inline decision re-evaluated but remain unchanged
+  Finished generating code
+  SDL_intro.vcxproj -> C:\Users\judgementine\Documents\GitHub\Image-Simulated-annealing\graphics_examples\SDL_SA_img\Release\SDL_intro.exe

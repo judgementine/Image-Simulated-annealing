@@ -140,14 +140,10 @@ namespace Game
 				for (int x = 0; x < sq[i].w; x++)
 				{
 					int x_offset = sq[i].x + x;
-					p[y_offset+x_offset].r = ((float)p[y_offset + x_offset].r + (float)sq[i].color.r) / 2.0;
-					p[y_offset + x_offset].g = ((float)p[y_offset + x_offset].g + (float)sq[i].color.g) / 2.0;
-					p[y_offset + x_offset].b = ((float)p[y_offset + x_offset].b + (float)sq[i].color.b) / 2.0;
-					/*
 					Pixel *s = &p[y_offset];
 					s[x_offset].r = ((float)s[x_offset].r + (float)sq[i].color.r) / 2.0;
 					s[x_offset].g = ((float)s[x_offset].g + (float)sq[i].color.g) / 2.0;
-					s[x_offset].b = ((float)s[x_offset].b + (float)sq[i].color.b) / 2.0;*/
+					s[x_offset].b = ((float)s[x_offset].b + (float)sq[i].color.b) / 2.0;
 					
 				}
 			}
@@ -175,8 +171,9 @@ namespace Game
 		image = SDL_CreateRGBSurfaceWithFormat(0, screen_width, screen_height, 24, SDL_PIXELFORMAT_RGB24);
 		SDL_BlitSurface(original, NULL, image, NULL);
 
-		current_solution_surface = SDL_CreateRGBSurfaceWithFormat(0, screen_width, screen_width, 24, SDL_PIXELFORMAT_RGB24);
+		current_solution_surface = SDL_CreateRGBSurfaceWithFormat(0, screen_width, screen_height, 24, SDL_PIXELFORMAT_RGB24);
 		SDL_BlitSurface(image, NULL, current_solution_surface, NULL);
+
 		Pixel * p = (Pixel *)current_solution_surface->pixels;
 		for (int i = 0; i < current_solution_surface->w * current_solution_surface->h; i++)
 		{

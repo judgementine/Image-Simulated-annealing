@@ -142,7 +142,7 @@ namespace Game
 					int x_offset = sq[i].x + x;
 					p[y_offset+x_offset].r = ((float)p[y_offset + x_offset].r + (float)sq[i].color.r) / 2.0;
 					p[y_offset + x_offset].g = ((float)p[y_offset + x_offset].g + (float)sq[i].color.g) / 2.0;
-					p[y_offset + x_offset].b = ((float)p[y_offset + x_offset].b + (float)sq[i].color.b3) / 2.0;
+					p[y_offset + x_offset].b = ((float)p[y_offset + x_offset].b + (float)sq[i].color.b) / 2.0;
 					/*
 					Pixel *s = &p[y_offset];
 					s[x_offset].r = ((float)s[x_offset].r + (float)sq[i].color.r) / 2.0;

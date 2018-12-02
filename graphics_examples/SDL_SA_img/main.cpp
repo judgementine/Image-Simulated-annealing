@@ -140,10 +140,14 @@ namespace Game
 				for (int x = 0; x < sq[i].w; x++)
 				{
 					int x_offset = sq[i].x + x;
+					p[y_offset+x_offset].r = ((float)p[y_offset + x_offset].r + (float)sq[i].color.r) / 2.0;
+					p[y_offset + x_offset].g = ((float)p[y_offset + x_offset].g + (float)sq[i].color.g) / 2.0;
+					p[y_offset + x_offset].b = ((float)p[y_offset + x_offset].b + (float)sq[i].color.b3) / 2.0;
+					/*
 					Pixel *s = &p[y_offset];
 					s[x_offset].r = ((float)s[x_offset].r + (float)sq[i].color.r) / 2.0;
 					s[x_offset].g = ((float)s[x_offset].g + (float)sq[i].color.g) / 2.0;
-					s[x_offset].b = ((float)s[x_offset].b + (float)sq[i].color.b) / 2.0;
+					s[x_offset].b = ((float)s[x_offset].b + (float)sq[i].color.b) / 2.0;*/
 					
 				}
 			}
@@ -163,7 +167,7 @@ namespace Game
 			SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
 			screen_width, screen_height, SDL_WINDOW_SHOWN);
 
-		renderer = SDL_CreateRenderer(window,-1, SDL_RENDERER_SOFTWARE);
+		renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 
 		original = IMG_Load(filename);
 		printf("bits: %d pitch: %d w: %d h: %d\n", original->format->BitsPerPixel, original->pitch, original->w, original->h);
@@ -237,7 +241,6 @@ namespace Game
 		for (int i = 0; i < Game::n_permute_same_temp; i++)
 		{
 
-			
 			memcpy(permuted_squares, current_squares, sizeof(Square)*n_boxes);
 
 			permute_Boxes(permuted_squares, n_boxes, n_permuted_boxes_per_iteration);

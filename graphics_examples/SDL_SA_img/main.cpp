@@ -39,29 +39,31 @@ namespace Game
 	unsigned char *keys = NULL;
 	SDL_Window *window = NULL;
 
-	SDL_Surface *original;
-	SDL_Surface *image;
+	SDL_Surface **original;
+	SDL_Surface **image;
 	SDL_Surface *current_solution_surface;
 	SDL_Surface *permuted_solution_surface;
 	SDL_Surface *screen;
 
 	Square * current_squares;
 	Square * permuted_squares;
-	
+
+	int n_images = 4;
+	int current_image = 0;
 
 	//EXPERIMENT WITH THESE
-	int n_boxes = 600;
-	int min_size = 10;
+	int n_boxes = 1200;
+	int min_size = 20;
 	int max_size = 100;
 
 	double current_error = 0.0;
 	float temperature = 1.0;
 	float position_permute_amount = 10.0;//<-- VERY IMPORTANT RANK 3
-	float color_permute_amount = 10.0;//<-- VERY IMPORTANT RANK 3
-	float size_permute_amount = 4.0;//<-- VERY IMPORTANT RANK 3
-	float temperature_decay = 0.99;//<-- VERY IMPORTANT RANK 1
-	int n_permute_same_temp = 15;//<-- VERY IMPORTANT RANK 2
-	int n_permuted_boxes_per_iteration = n_boxes*0.1;//<-- VERY IMPORTANT RANK 2
+	float color_permute_amount = 15.0;//<-- VERY IMPORTANT RANK 3
+	float size_permute_amount = 8.0;//<-- VERY IMPORTANT RANK 3
+	float temperature_decay = 0.98;//<-- VERY IMPORTANT RANK 1
+	int n_permute_same_temp = 20;//<-- VERY IMPORTANT RANK 2
+	int n_permuted_boxes_per_iteration = n_boxes*0.2;//<-- VERY IMPORTANT RANK 2
 
 	//EXPERIMENT WITH THIS
 	void permute_Boxes(Square *s, int n_boxes, int n_permute)
@@ -165,14 +167,24 @@ namespace Game
 
 		renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 
-		original = IMG_Load(filename);
-		printf("bits: %d pitch: %d w: %d h: %d\n", original->format->BitsPerPixel, original->pitch, original->w, original->h);
+		original = new SDL_Surface*[n_images];
+		original[0] = IMG_Load("test.png");
+		original[1] = IMG_Load("coolcat.jpg");
+		original[2] = IMG_Load("moonhitplanet.jpg");
+		original[3] = IMG_Load("Nice-Cool-Image.jpg");
 
-		image = SDL_CreateRGBSurfaceWithFormat(0, screen_width, screen_height, 24, SDL_PIXELFORMAT_RGB24);
-		SDL_BlitSurface(original, NULL, image, NULL);
+
+		printf("bits: %d pitch: %d w: %d h: %d\n", original[0]->format->BitsPerPixel, original[0]->pitch, original[0]->w, original[0]->h);
+
+		image = new SDL_Surface*[n_images];
+		for (int i = 0; i < n_images; i++)
+		{
+			image[i] = SDL_CreateRGBSurfaceWithFormat(0, screen_width, screen_height, 24, SDL_PIXELFORMAT_RGB24);
+			SDL_BlitScaled(original[i], NULL, image[i], NULL);
+		}
 
 		current_solution_surface = SDL_CreateRGBSurfaceWithFormat(0, screen_width, screen_height, 24, SDL_PIXELFORMAT_RGB24);
-		SDL_BlitSurface(image, NULL, current_solution_surface, NULL);
+		SDL_BlitSurface(image[current_image], NULL, current_solution_surface, NULL);
 
 		Pixel * p = (Pixel *)current_solution_surface->pixels;
 		for (int i = 0; i < current_solution_surface->w * current_solution_surface->h; i++)
@@ -193,8 +205,8 @@ namespace Game
 		{
 			current_squares[i].w = Game::min_size + rand() % (Game::max_size - Game::min_size);
 			current_squares[i].h = Game::min_size + rand() % (Game::max_size - Game::min_size);
-			current_squares[i].x = rand() % (image->w - current_squares[i].w);
-			current_squares[i].y = rand() % (image->h - current_squares[i].h);
+			current_squares[i].x = rand() % (image[current_image]->w - current_squares[i].w);
+			current_squares[i].y = rand() % (image[current_image]->h - current_squares[i].h);
 			
 			if (CHEAT == 0)
 			{
@@ -204,26 +216,26 @@ namespace Game
 			}
 			else if(CHEAT == 1)
 			{
-				int x = rand() % image->w;
-				int y = rand() % image->h;
-				Pixel *s = (Pixel *)image->pixels;
-				current_squares[i].color.r = s[y*image->w+x].r;
-				current_squares[i].color.g = s[y*image->w + x].g;
-				current_squares[i].color.b = s[y*image->w + x].b;
+				int x = rand() % image[current_image]->w;
+				int y = rand() % image[current_image]->h;
+				Pixel *s = (Pixel *)image[current_image]->pixels;
+				current_squares[i].color.r = s[y*image[current_image]->w+x].r;
+				current_squares[i].color.g = s[y*image[current_image]->w + x].g;
+				current_squares[i].color.b = s[y*image[current_image]->w + x].b;
 			}
 			else if (CHEAT == 2)
 			{
-				Pixel *s = (Pixel *)image->pixels;
-				current_squares[i].color.r = s[current_squares[i].y*image->w + current_squares[i].x].r;
-				current_squares[i].color.g = s[current_squares[i].y*image->w + current_squares[i].x].g;
-				current_squares[i].color.b = s[current_squares[i].y*image->w + current_squares[i].x].b;
+				Pixel *s = (Pixel *)image[current_image]->pixels;
+				current_squares[i].color.r = s[current_squares[i].y*image[current_image]->w + current_squares[i].x].r;
+				current_squares[i].color.g = s[current_squares[i].y*image[current_image]->w + current_squares[i].x].g;
+				current_squares[i].color.b = s[current_squares[i].y*image[current_image]->w + current_squares[i].x].b;
 			}
 			
 		}
 
 		memset(current_solution_surface->pixels, 0, current_solution_surface->pitch*current_solution_surface->h);
 		blend(current_solution_surface, current_squares);
-		current_error = difference(image, current_solution_surface);
+		current_error = difference(image[current_image], current_solution_surface);
 		
 	}
 
@@ -253,7 +265,7 @@ namespace Game
 			memset(permuted_solution_surface->pixels, 0, permuted_solution_surface->pitch*permuted_solution_surface->h);
 			blend(permuted_solution_surface, permuted_squares);
 
-			double permuted_error = difference(image, permuted_solution_surface);
+			double permuted_error = difference(image[current_image], permuted_solution_surface);
 
 			float p = exp((current_error - permuted_error) / temperature);
 			float r = (double)rand() / RAND_MAX;
@@ -273,6 +285,16 @@ namespace Game
 		}
 		printf("temp: %f current error: %f\n", temperature, current_error);
 		temperature *= temperature_decay;
+		if (current_error < 6000)
+		{
+			temperature = 1;
+			int newImage = rand() % n_images;
+			current_image = newImage;
+			/*
+			current_image++;
+
+			current_image %= 4;*/
+		}
 		
 		
 	}
@@ -296,7 +318,7 @@ int main(int argc, char **argv)
 
 	srand(time(0));
 
-	Game::init("test.png");
+	Game::init("moonhitplanet.jpg");
 
 
 	for(;;)
